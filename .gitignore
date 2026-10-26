@@ -1,0 +1,9 @@
+.env
+data/
+__pycache__/
+*.pyc
+.pytest_cache/
+.venv/
+
+# Личные заметки — не публикуем
+CODE_GUIDE.md

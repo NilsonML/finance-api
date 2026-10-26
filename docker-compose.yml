@@ -1,0 +1,15 @@
+services:
+  api:
+    build: .
+    env_file: .env
+    ports:
+      - "8000:8000"           # порт компьютера : порт контейнера
+    volumes:
+      - ./data:/app/data      # база SQLite живёт на диске хоста и не пропадает при пересборке
+    restart: unless-stopped
+    healthcheck:
+      # Docker раз в 30 секунд проверяет /health; если сервис завис — помечает контейнер unhealthy
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/health')"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
